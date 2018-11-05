@@ -1,0 +1,9 @@
+:root {
+  --color-background-main: #272727;
+  --color-background-secondary: #333333;
+  --color-background-light: #ffffff;
+  --color-foreground-main: #ffffff;
+  --color-foreground-dark: #000000;
+
+  --fonts-main: "Ubuntu", sans-serif;
+}

@@ -1,0 +1,121 @@
+@import url("https://fonts.googleapis.com/css?family=Ubuntu:400,400i,700");
+@import url("variables.css");
+
+/* Desktop Background */
+html {
+  background: url("background.jpg") no-repeat center center fixed;
+  background-color: #4e8cda;
+  background-size: cover;
+}
+
+/* Remove Padding/Margin of Body */
+body {
+  margin: 0;
+  padding: 0;
+}
+
+/* Use Cursor for Clickable Elements */
+button, input[type="button"], input[type="submit"], input[type="reset"], .xos-bar-item, .xos-window-closer, #xos-menu-shower {
+  cursor: pointer;
+}
+
+/* Use Correct Font for Everything */
+button, input, textarea, body {
+  font-family: var(--fonts-main);
+}
+
+/* Button Styles */
+button, input[type="button"], input[type="submit"], input[type="reset"] {
+  color: var(--color-foreground-main);
+  background: none;
+  border: 2px solid var(--color-foreground-main);
+  border-radius: 10px;
+  padding: 10px;
+  outline: none;
+  margin-right: 10px;
+  margin-bottom: 10px;
+}
+
+button:hover, input[type="button"]:hover, input[type="submit"]:hover, input[type="reset"]:hover {
+  background: var(--color-background-light);
+  color: var(--color-foreground-dark);
+}
+
+/* Bar Styles */
+#xos-bar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 40px;
+  box-sizing: border-box;
+  line-height: 20px;
+  font-size: 20px;
+  vertical-align: middle;
+  padding: 10px;
+  background: var(--color-background-main);
+  color: var(--color-foreground-main);
+}
+
+.xos-bar-item {
+  font-size: 15px;
+  vertical-align: 2.5px;
+  margin-left: 10px;
+}
+
+/* Menu Styles */
+#xos-menu {
+  position: fixed;
+  bottom: 40px;
+  left: 0;
+  right: 0;
+  height: 350px;
+  width: 300px;
+  box-sizing: border-box;
+  background: var(--color-background-secondary);
+  padding: 10px;
+  overflow: auto;
+}
+
+/* Application Styles */
+.xos-window {
+  background: var(--color-background-secondary);
+  color: var(--color-foreground-main);
+  font-size: 15px;
+  width: 300px;
+  position: fixed;
+  left: 0;
+  top: 0;
+}
+
+.xos-window-border {
+  cursor: move;
+  height: 35px;
+  padding: 10px;
+  box-sizing: border-box;
+  line-height: 15px;
+  background: var(--color-background-main);
+}
+
+.xos-window-content {
+  padding: 10px;
+  height: 200px;
+  overflow: auto;
+}
+
+.xos-window-closer {
+  float: right;
+}
+
+.xos-window-resizer {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 10px;
+  height: 10px;
+  cursor: se-resize;
+}
+
+.xos-window-border, .xos-window-content {
+  width: 100%;
+}
