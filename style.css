@@ -24,6 +24,20 @@ button, input, textarea, body {
   font-family: var(--fonts-main);
 }
 
+/* Link Styles */
+a {
+  color: var(--color-foreground-link);
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+a:active, a:visited {
+  color: var(--color-foreground-link);
+}
+
 /* Button Styles */
 button, input[type="button"], input[type="submit"], input[type="reset"] {
   color: var(--color-foreground-main);
@@ -101,6 +115,7 @@ button:hover, input[type="button"]:hover, input[type="submit"]:hover, input[type
   padding: 10px;
   height: 250px;
   overflow: auto;
+  box-sizing: border-box;
 }
 
 .xos-window-closer {

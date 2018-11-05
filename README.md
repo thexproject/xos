@@ -7,7 +7,7 @@
 
 ## About
 
-Someone I know made something called [vOS](https://vos.codexcore.com/). I liked the idea, and wanted to make my own. I didn's steal any code, xOS is entirely written by me, from scratch, in JavaScript. I used another library, [X](https://gtihub.com/thexproject/x/) quite a lot in the construction of xOS, and I added a lot of features to it that were needed for xOS.
+Someone I know made something called [vOS](https://vos.codexcore.com/). I liked the idea, and wanted to make my own. I didn's steal any code, xOS is entirely written by me, from scratch, in JavaScript. I used another library, [X](https://github.com/thexproject/x/) quite a lot in the construction of xOS, and I added a lot of features to it that were needed for xOS.
 
 ## Improvements
 
