@@ -24,6 +24,20 @@ button, input, textarea, body {
   font-family: var(--fonts-main);
 }
 
+/* Link Styles */
+a {
+  color: var(--color-foreground-link);
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+a:active, a:visited {
+  color: var(--color-foreground-link);
+}
+
 /* Button Styles */
 button, input[type="button"], input[type="submit"], input[type="reset"] {
   color: var(--color-foreground-main);
