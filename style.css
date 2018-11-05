@@ -101,6 +101,7 @@ button:hover, input[type="button"]:hover, input[type="submit"]:hover, input[type
   padding: 10px;
   height: 250px;
   overflow: auto;
+  box-sizing: border-box;
 }
 
 .xos-window-closer {
