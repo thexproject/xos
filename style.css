@@ -102,6 +102,10 @@ button:hover, input[type="button"]:hover, input[type="submit"]:hover, input[type
   top: 0;
 }
 
+.xos-window.xos-is-mobile {
+  width: 100%;
+}
+
 .xos-window-border {
   cursor: move;
   height: 35px;
@@ -116,6 +120,10 @@ button:hover, input[type="button"]:hover, input[type="submit"]:hover, input[type
   height: 250px;
   overflow: auto;
   box-sizing: border-box;
+}
+
+.xos-window-content.xos-is-mobile {
+  height: calc(100vh - (35px + 40px));
 }
 
 .xos-window-closer {
