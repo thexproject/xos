@@ -40,7 +40,8 @@
       if (!fixed) {
         this.element.append(`
           <div class="xos-window-resizer"></div>
-        `).find(".xos-window-border").append(`
+        `);
+        this.element.find(".xos-window-border").append(`
           <i class="fas fa-window-maximize xos-window-maximizer xos-window-action"></i>
         `);
       }
@@ -92,8 +93,10 @@
       this.endpoint = endpoint.replace(/\/$/, "");
 
       this.applications = {};
-      this.opened = 0;
       this.cache = {};
+      this.backgrounds = {};
+
+      this.opened = 0;
       this.windowOffsetTop = 30;
       this.windowOffsetLeft = 30;
       this.windowReachedBottom = 0;
@@ -115,6 +118,7 @@
       }
       logger.log("Fetched new applications.");
 
+      this.menu.clear();
       for (let application in this.applications) {
         this.menu.remove(application.id);
         delete this.applications[application];
@@ -127,14 +131,6 @@
       }
       logger.log("Loaded new applications.");
     }
-    async startStartupApplications() {
-      for (let application of await this.api("startup")) {
-        this.startApplication(application);
-      }
-
-      logger.log("Started startup applications.");
-    }
-
     async startApplication(id) {
       this.menu.element.style("display", "none");
 
@@ -174,6 +170,43 @@
         this.windowReachedBottom = 0;
       }
       logger.log(`Done starting application ${id}.`);
+    }
+    async startStartupApplications() {
+      for (let application of await this.api("applications/startup")) {
+        await this.startApplication(application);
+      }
+
+      logger.log("Started startup applications.");
+    }
+
+    async loadBackgrounds() {
+      this.backgrounds = {};
+      for (let background of await this.api("backgrounds")) {
+        this.backgrounds[background.id] = {
+          "name": background.name,
+          "value": background.value,
+          "solid": background.solid,
+          "englishType": background.solid ? "Solid Color" : "Image"
+        };
+      }
+      logger.log("Fetched and loaded new backgrounds.");
+    }
+    setBackground(id) {
+      if (id in this.backgrounds) {
+        if (this.backgrounds[id].solid) {
+          x("html").style("background-image", "").style("background-color", this.backgrounds[id].value);
+        } else {
+          x("html").style("background-image", `url("${this.backgrounds[id].value}")`);
+        }
+        logger.log(`Set background to ${id}.`);
+      } else {
+        logger.warn(`${id} isn't a loaded background.`);
+      }
+    }
+    async setDefaultBackground() {
+      this.setBackground(await this.api("backgrounds/default"));
+
+      logger.log("Set default background.");
     }
 
     windowClosed(id) {
@@ -225,6 +258,10 @@
       } else {
         logger.warn(`Application ${id} not in menu`);
       }
+    }
+
+    clear() {
+      this.element.html("");
     }
 
     toggle(that) {
@@ -377,5 +414,9 @@
   if (check) x("body").addClass("xos-is-mobile");
 })();
 
-manager.loadApplications();
-manager.startStartupApplications();
+(async () => {
+  await manager.loadApplications();
+  await manager.loadBackgrounds();
+  manager.setDefaultBackground();
+  manager.startStartupApplications();
+})();

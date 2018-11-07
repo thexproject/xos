@@ -3,9 +3,13 @@
 
 /* Desktop Background */
 html {
-  background: url("background.jpg") no-repeat center center fixed;
-  background-color: #4e8cda;
+  background-color: #909090;
+  background-position: center;
   background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-origin: initial;
+  background-clip: initial;
 }
 
 /* Remove Padding/Margin of Body */
@@ -15,7 +19,7 @@ body {
 }
 
 /* Use Cursor for Clickable Elements */
-button, input[type="button"], input[type="submit"], input[type="reset"], .xos-bar-item, .xos-window-action, #xos-menu-shower {
+button, input[type="button"], input[type="submit"], input[type="reset"], .xos-bar-item, .xos-window-action, .xos-button-like, #xos-menu-shower {
   cursor: pointer;
 }
 
@@ -44,18 +48,21 @@ a:active, a:visited {
 }
 
 /* Button Styles */
-button, input[type="button"], input[type="submit"], input[type="reset"] {
+button, input[type="button"], input[type="submit"], input[type="reset"], .xos-button-like {
   color: var(--color-foreground-main);
   background: none;
   border: 2px solid var(--color-foreground-main);
   border-radius: 10px;
   padding: 10px;
   outline: none;
-  margin-right: 10px;
   margin-bottom: 10px;
 }
 
-button:hover, input[type="button"]:hover, input[type="submit"]:hover, input[type="reset"]:hover {
+button, input[type="button"], input[type="submit"], input[type="reset"] {
+  margin-right: 10px;
+}
+
+button:hover, input[type="button"]:hover, input[type="submit"]:hover, input[type="reset"]:hover, .xos-button-like:hover {
   background: var(--color-background-light);
   color: var(--color-foreground-dark);
 }
@@ -132,7 +139,7 @@ button:hover, input[type="button"]:hover, input[type="submit"]:hover, input[type
   box-sizing: border-box;
   border: 2px solid var(--color-background-main);
   border-top: none;
-  line-height: 300%;
+  line-height: 150%;
   border: none;
 }
 
