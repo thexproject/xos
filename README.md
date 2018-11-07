@@ -18,7 +18,6 @@ xOS is still in development, and there is a lot to get done. The below list is p
 - Disable highlighting some UI elements
 - Account system
 - Dynamic wallpaper
-- Maximize button
 - Fixed size windows
 - Console
 
