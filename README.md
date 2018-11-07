@@ -23,4 +23,4 @@ xOS is still in development, and there is a lot to get done. The below list is p
 
 ## Links
 
-xOS is hosted on GitHub pages [here](https://thexproject.github.io/xos/). xCloud, the backend (soon to be on GitHub) is hosted [here](https://repl.it/@FelixMattick/xCloud) on repl.it. Because of the nature of repl.it, it may spontaneously go offline. Feel free to message me on Gitter if it does. I'm trying to get a VPS for hosting but I can't afford it; I would really appreciate it if you [donated money](https://paypal.me/archmaster666) to me.
+xOS's `master` branch is hosted using Netlify [here](https://xos.netlify.com/). The development branch is [here](https://xos-dev.netlify.com/). xCloud, the backend (soon to be on GitHub) is hosted [here](https://repl.it/@FelixMattick/xCloud) on repl.it. Because of the nature of repl.it, it may spontaneously go offline. Feel free to message me on Gitter if it does.
