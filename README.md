@@ -13,13 +13,11 @@ Someone I know made something called [vOS](https://vos.codexcore.com/). I liked 
 
 xOS is still in development, and there is a lot to get done. The below list is primarily for me, but feel free to submit a PR or Issue!
 
-- [ ] Better resizing and moving of windows
-- [ ] Styles for more elements such as form elements
-- [ ] Disable highlighting some UI elements
-- [ ] Account system
-- [ ] Dynamic wallpaper
-- [ ] Drop shadows on windows and maybe menu
-- [ ] Come up with more ideas
+- Better resizing and moving of windows
+- Styles for more elements such as form elements
+- Disable highlighting some UI elements
+- Account system
+- Dynamic wallpaper
 
 ## Links
 
