@@ -24,6 +24,11 @@ button, input, textarea, body {
   font-family: var(--fonts-main);
 }
 
+/* Remove Heading Boldness */
+h1, h2, h3, h4, h5, h6 {
+  font-weight: normal;
+}
+
 /* Link Styles */
 a {
   color: var(--color-foreground-link);
@@ -89,6 +94,10 @@ button:hover, input[type="button"]:hover, input[type="submit"]:hover, input[type
   background: var(--color-background-secondary);
   padding: 10px;
   overflow: auto;
+  z-index: 999;
+  border: 2px solid var(--color-background-main);
+  border-left: none;
+  border-bottom: none;
 }
 
 /* Application Styles */
@@ -100,6 +109,10 @@ button:hover, input[type="button"]:hover, input[type="submit"]:hover, input[type
   position: fixed;
   left: 0;
   top: 0;
+}
+
+.xos-is-mobile .xos-window {
+  width: 100%;
 }
 
 .xos-window-border {
@@ -116,6 +129,12 @@ button:hover, input[type="button"]:hover, input[type="submit"]:hover, input[type
   height: 250px;
   overflow: auto;
   box-sizing: border-box;
+  border: 2px solid var(--color-background-main);
+  border-top: none;
+}
+
+.xos-is-mobile .xos-window-content {
+  height: calc(100vh - (35px + 40px));
 }
 
 .xos-window-closer {
