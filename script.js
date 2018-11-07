@@ -103,9 +103,8 @@
       this.cache = {};
       logger.log("Cleared cache.");
 
-      let applications = (await this.api("applications")).data;
       let newApplications = {};
-      for (let application of applications) {
+      for (let application of await this.api("applications")) {
         newApplications[application.id] = {
           "name": application.name,
           "uri": application.uri,
@@ -127,6 +126,13 @@
         this.applications[application] = newApplications[application];
       }
       logger.log("Loaded new applications.");
+    }
+    async startStartupApplications() {
+      for (let application of await this.api("startup")) {
+        this.startApplication(application);
+      }
+
+      logger.log("Started startup applications.");
     }
 
     async startApplication(id) {
@@ -176,7 +182,7 @@
 
     async api(path, queries) {
       let ajaxResponse = await xJax(`${this.endpoint}/${path}`, queries);
-      return JSON.parse(ajaxResponse);
+      return JSON.parse(ajaxResponse).data;
     }
   }
 
@@ -372,3 +378,4 @@
 })();
 
 manager.loadApplications();
+manager.startStartupApplications();
