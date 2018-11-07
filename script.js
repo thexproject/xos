@@ -23,7 +23,8 @@
         <div class="xos-window" id="xos-window-${id}">
           <div class="xos-window-border">
             <span class="xos-window-name">${name}</span>
-            <i class="fas fa-window-close xos-window-closer"></i>
+            <i class="fas fa-window-close xos-window-closer xos-window-action"></i>
+            <i class="fas fa-window-maximize xos-window-maximizer xos-window-action"></i>
           </div>
           <div class="xos-window-content">
             ${code}
@@ -35,15 +36,33 @@
       logger.log("Added window to DOM.");
 
       this.element.find(".xos-window-closer").click(this.close, this);
-      logger.log("Registered close handler.");
+      this.element.find(".xos-window-maximizer").click(this.maximizeOrRestore, this);
+      logger.log("Registered handlers.");
 
       new xOSDraggableThing(this.element.find(".xos-window-border"), this.element);
-      new xOSResizableThing(this.element.find(".xos-window-resizer"), this.element, this.element.find(".xos-window-content"));
+      this.resizer = new xOSResizableThing(this.element.find(".xos-window-resizer"), this.element, this.element.find(".xos-window-content"));
+
+      this.maximized = false;
     }
 
     close(that) {
       that.element.destroy();
       manager.windowClosed(that.id);
+    }
+    maximizeOrRestore(that) {
+      if (that.maximized) {
+        that.element.removeClass("xos-maximized");
+        that.resizer.enableResizing(that.resizer);
+        that.element.find(".xos-window-maximizer").removeClass("fa-window-restore").addClass("fa-window-maximize");
+
+        that.maximized = false;
+      } else {
+        that.element.addClass("xos-maximized");
+        that.resizer.disableResizing(that.resizer);
+        that.element.find(".xos-window-maximizer").removeClass("fa-window-maximize").addClass("fa-window-restore");
+
+        that.maximized = true;
+      }
     }
   }
 
@@ -295,7 +314,7 @@
 
       this.startX, this.startY, this.startWidth, this.startHeight = 0;
 
-      this.elementWithEdge.on("mousedown", this.start, this);
+      this.enableResizing(this);
     }
 
     start(event, that) {
@@ -314,6 +333,13 @@
     }
     end(_, that) {
       x(document).rmOn("mousemove", that.middle).rmOn("mouseup", that.end);
+    }
+
+    enableResizing(that) {
+      that.elementWithEdge.on("mousedown", that.start, that);
+    }
+    disableResizing(that) {
+      that.elementWithEdge.rmOn("mousedown", that.start);
     }
   }
 
