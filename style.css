@@ -15,7 +15,7 @@ body {
 }
 
 /* Use Cursor for Clickable Elements */
-button, input[type="button"], input[type="submit"], input[type="reset"], .xos-bar-item, .xos-window-closer, #xos-menu-shower {
+button, input[type="button"], input[type="submit"], input[type="reset"], .xos-bar-item, .xos-window-action, #xos-menu-shower {
   cursor: pointer;
 }
 
@@ -111,7 +111,9 @@ button:hover, input[type="button"]:hover, input[type="submit"]:hover, input[type
   top: 0;
 }
 
-.xos-is-mobile .xos-window {
+.xos-is-mobile .xos-window, .xos-window.xos-maximized {
+  top: 0 !important;
+  left: 0 !important;
   width: 100%;
 }
 
@@ -135,11 +137,12 @@ button:hover, input[type="button"]:hover, input[type="submit"]:hover, input[type
   line-height: 1.5em;
 }
 
-.xos-is-mobile .xos-window-content {
+.xos-is-mobile .xos-window-content, .xos-maximized .xos-window-content {
   height: calc(100vh - (35px + 40px));
 }
 
-.xos-window-closer {
+.xos-window-action {
+  margin-left: 5px;
   float: right;
 }
 
