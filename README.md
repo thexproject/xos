@@ -17,8 +17,8 @@ xOS is still in development, and there is a lot to get done. The below list is p
 - Styles for more elements such as form elements
 - Disable highlighting some UI elements
 - Account system
-- Dynamic wallpaper
 - Console
+- Focusing on windows should bring them to the top
 
 ## Links
 
