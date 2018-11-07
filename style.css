@@ -140,7 +140,6 @@ button:hover, input[type="button"]:hover, input[type="submit"]:hover, input[type
   border: 2px solid var(--color-background-main);
   border-top: none;
   line-height: 150%;
-  border: none;
 }
 
 .xos-is-mobile .xos-window-content, .xos-maximized .xos-window-content {
