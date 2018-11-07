@@ -19,7 +19,6 @@ xOS is still in development, and there is a lot to get done. The below list is p
 - Account system
 - Dynamic wallpaper
 - Console
-- Startup applications
 
 ## Links
 
