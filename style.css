@@ -3,9 +3,13 @@
 
 /* Desktop Background */
 html {
-  background: url("background.jpg") no-repeat center center fixed;
-  background-color: #4e8cda;
+  background-color: #909090;
+  background-position: center;
   background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-origin: initial;
+  background-clip: initial;
 }
 
 /* Remove Padding/Margin of Body */
@@ -15,7 +19,7 @@ body {
 }
 
 /* Use Cursor for Clickable Elements */
-button, input[type="button"], input[type="submit"], input[type="reset"], .xos-bar-item, .xos-window-closer, #xos-menu-shower {
+button, input[type="button"], input[type="submit"], input[type="reset"], .xos-bar-item, .xos-window-action, .xos-button-like, #xos-menu-shower {
   cursor: pointer;
 }
 
@@ -44,18 +48,21 @@ a:active, a:visited {
 }
 
 /* Button Styles */
-button, input[type="button"], input[type="submit"], input[type="reset"] {
+button, input[type="button"], input[type="submit"], input[type="reset"], .xos-button-like {
   color: var(--color-foreground-main);
   background: none;
   border: 2px solid var(--color-foreground-main);
   border-radius: 10px;
   padding: 10px;
   outline: none;
-  margin-right: 10px;
   margin-bottom: 10px;
 }
 
-button:hover, input[type="button"]:hover, input[type="submit"]:hover, input[type="reset"]:hover {
+button, input[type="button"], input[type="submit"], input[type="reset"] {
+  margin-right: 10px;
+}
+
+button:hover, input[type="button"]:hover, input[type="submit"]:hover, input[type="reset"]:hover, .xos-button-like:hover {
   background: var(--color-background-light);
   color: var(--color-foreground-dark);
 }
@@ -105,14 +112,15 @@ button:hover, input[type="button"]:hover, input[type="submit"]:hover, input[type
   background: var(--color-background-secondary);
   color: var(--color-foreground-main);
   font-size: 15px;
-  width: 300px;
   position: fixed;
   left: 0;
   top: 0;
 }
 
-.xos-is-mobile .xos-window {
-  width: 100%;
+.xos-is-mobile .xos-window, .xos-window.xos-maximized {
+  top: 0 !important;
+  left: 0 !important;
+  width: 100% !important;
 }
 
 .xos-window-border {
@@ -122,23 +130,30 @@ button:hover, input[type="button"]:hover, input[type="submit"]:hover, input[type
   box-sizing: border-box;
   line-height: 15px;
   background: var(--color-background-main);
+  overflow: hidden;
 }
 
 .xos-window-content {
   padding: 10px;
-  height: 250px;
   overflow: auto;
   box-sizing: border-box;
   border: 2px solid var(--color-background-main);
   border-top: none;
+  line-height: 150%;
+  border: none;
 }
 
-.xos-is-mobile .xos-window-content {
-  height: calc(100vh - (35px + 40px));
+.xos-is-mobile .xos-window-content, .xos-maximized .xos-window-content {
+  height: calc(100vh - (35px + 40px)) !important;
 }
 
-.xos-window-closer {
+.xos-window-action {
+  margin-left: 5px;
   float: right;
+}
+
+.xos-is-mobile .xos-window-maximizer {
+  display: none;
 }
 
 .xos-window-resizer {
