@@ -17,7 +17,8 @@
     constructor(name, code, id) {
       this.id = id;
       logger.log(`Window ID is ${id}.`);
-    
+
+      code = xAct(code);
       x("body").append(`
         <div class="xos-window" id="xos-window-${id}">
           <div class="xos-window-border">
@@ -32,17 +33,14 @@
       `);
       this.element = x(`#xos-window-${id}`);
       logger.log("Added window to DOM.");
-    
-      xAct(this.element.find(".xos-window-content"));
-      logger.log("Parsed application code with xAct.");
-      
+
       this.element.find(".xos-window-closer").click(this.close, this);
       logger.log("Registered close handler.");
 
       new xOSDraggableThing(this.element.find(".xos-window-border"), this.element);
       new xOSResizableThing(this.element.find(".xos-window-resizer"), this.element, this.element.find(".xos-window-content"));
     }
-  
+
     close(that) {
       that.element.destroy();
       manager.windowClosed(that.id);
@@ -59,6 +57,9 @@
       this.applications = {};
       this.opened = 0;
       this.cache = {};
+      this.windowOffsetTop = 30;
+      this.windowOffsetLeft = 30;
+      this.windowReachedBottom = 0;
     }
 
     async loadApplications() {
@@ -89,12 +90,14 @@
     }
 
     async startApplication(id) {
+      this.menu.element.style("display", "none");
+
       logger.log(`Starting application ${id}...`);
       if (!(id in this.applications)) {
         logger.warn(`${id} is not a loaded application.`);
         return;
       }
-      
+
       let code = "";
       if (id in this.cache) {
         code = this.cache[id];
@@ -106,10 +109,24 @@
       }
 
       let windowId = id + ++this.opened;
-      let window = new xOSWindow(this.applications[id].name, code, windowId);
+      let newWindow = new xOSWindow(this.applications[id].name, code, windowId);
+      newWindow.element
+        .style("top", this.windowOffsetTop + "px")
+        .style("left", this.windowOffsetLeft + "px");
 
-      this.bar.opened(window, windowId, this.applications[id].name);
+      this.bar.opened(newWindow, windowId, this.applications[id].name);
 
+      this.windowOffsetTop += 30;
+      this.windowOffsetLeft += 30;
+      if (this.windowOffsetTop >= window.innerHeight - 30) {
+        this.windowOffsetTop = 30;
+        this.windowOffsetLeft = 30 + 60 * ++this.windowReachedBottom;
+      }
+      if (this.windowOffsetLeft >= window.innerWidth - 30) {
+        this.windowOffsetTop = 30;
+        this.windowOffsetLeft = 30;
+        this.windowReachedBottom = 0;
+      }
       logger.log(`Done starting application ${id}.`);
     }
 
@@ -165,6 +182,7 @@
     }
 
     toggle(that) {
+      if (that === undefined) that = this;
       that.element.style("display", that.element.style("display") === "none" ? "block" : "none");
     }
   }
@@ -239,35 +257,32 @@
     constructor(handle, drag) {
       this.handle = handle;
       this.toDrag = drag;
-  
+
       this.pos1, this.pos2, this.pos3, this.pos4 = 0;
       this.handle.on("mousedown", this.down, this);
     }
-  
+
     down(event, that) {
-      console.log("down");
       event.preventDefault();
-  
+
       that.pos3 = event.clientX;
       that.pos4 = event.clientY;
-      
+
       x(document).on("mousemove", that.drag, that).on("mouseup", that.up, that);
     }
     drag(event, that) {
-      console.log("drag");
       event.preventDefault();
-  
+
       that.pos1 = that.pos3 - event.clientX;
       that.pos2 = that.pos4 - event.clientY;
       that.pos3 = event.clientX;
       that.pos4 = event.clientY;
-  
+
       that.toDrag
         .style("top", (that.toDrag.node.offsetTop - that.pos2) + "px")
         .style("left", (that.toDrag.node.offsetLeft - that.pos1) + "px");
     }
     up(_, that) {
-      console.log("up");
       x(document).rmOn("mousemove", that.drag).rmOn("mouseup", that.up);
     }
   }
