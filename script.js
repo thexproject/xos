@@ -14,9 +14,14 @@
   }
 
   class xOSWindow {
-    constructor(name, code, id) {
+    constructor(name, code, id, fixed, width, height) {
       this.id = id;
       logger.log(`Window ID is ${id}.`);
+
+      if (!width) width = 300;
+      if (!height) height = 250;
+      this.width = width;
+      this.height = height;
 
       code = xAct(code);
       x("body").append(`
@@ -24,23 +29,36 @@
           <div class="xos-window-border">
             <span class="xos-window-name">${name}</span>
             <i class="fas fa-window-close xos-window-closer xos-window-action"></i>
-            <i class="fas fa-window-maximize xos-window-maximizer xos-window-action"></i>
           </div>
           <div class="xos-window-content">
             ${code}
           </div>
-          <div class="xos-window-resizer"></div>
         </div>
       `);
       this.element = x(`#xos-window-${id}`);
+      this.element.style("width", this.width + "px").find(".xos-window-content").style("height", this.height + "px");
+      if (!fixed) {
+        this.element.append(`
+          <div class="xos-window-resizer"></div>
+        `).find(".xos-window-border").append(`
+          <i class="fas fa-window-maximize xos-window-maximizer xos-window-action"></i>
+        `);
+      }
       logger.log("Added window to DOM.");
 
       this.element.find(".xos-window-closer").click(this.close, this);
-      this.element.find(".xos-window-maximizer").click(this.maximizeOrRestore, this);
+      if (!fixed) this.element.find(".xos-window-maximizer").click(this.maximizeOrRestore, this);
       logger.log("Registered handlers.");
 
       new xOSDraggableThing(this.element.find(".xos-window-border"), this.element);
-      this.resizer = new xOSResizableThing(this.element.find(".xos-window-resizer"), this.element, this.element.find(".xos-window-content"));
+      if (!fixed) {
+        this.resizer = new xOSResizableThing(this.element.find(".xos-window-resizer"), this.element, this.element.find(".xos-window-content"), this.width, this.height);
+      } else {
+        this.resizer = {
+          "enableResizing": () => {},
+          "disableResizing": () => {}
+        };
+      }
 
       this.maximized = false;
     }
@@ -90,7 +108,10 @@
       for (let application of applications) {
         newApplications[application.id] = {
           "name": application.name,
-          "uri": application.uri
+          "uri": application.uri,
+          "fixed": application.fixed,
+          "width": application.width,
+          "height": application.height
         };
       }
       logger.log("Fetched new applications.");
@@ -128,7 +149,7 @@
       }
 
       let windowId = id + ++this.opened;
-      let newWindow = new xOSWindow(this.applications[id].name, code, windowId);
+      let newWindow = new xOSWindow(this.applications[id].name, code, windowId, this.applications[id].fixed, this.applications[id].width, this.applications[id].height);
       newWindow.element
         .style("top", this.windowOffsetTop + "px")
         .style("left", this.windowOffsetLeft + "px");
