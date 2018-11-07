@@ -36,7 +36,7 @@ Sentry.init({ dsn: "https://27c74054843742d5ad692d229d30c1bf@sentry.io/1318270" 
             ${code}
           </div>
         </div>
-      `);
+      `).on("mousedown", () => manager.bringToFront(this.id));
       this.element = x(`#xos-window-${id}`);
       this.element.style("width", this.width + "px").find(".xos-window-content").style("height", this.height + "px");
       if (!fixed) {
@@ -99,6 +99,7 @@ Sentry.init({ dsn: "https://27c74054843742d5ad692d229d30c1bf@sentry.io/1318270" 
       this.applications = {};
       this.cache = {};
       this.backgrounds = {};
+      this.order = [];
 
       this.opened = 0;
       this.windowOffsetTop = 30;
@@ -159,6 +160,8 @@ Sentry.init({ dsn: "https://27c74054843742d5ad692d229d30c1bf@sentry.io/1318270" 
       newWindow.element
         .style("top", this.windowOffsetTop + "px")
         .style("left", this.windowOffsetLeft + "px");
+      this.order.push(newWindow);
+      this.bringToFront(newWindow.id);
 
       this.bar.opened(newWindow, windowId, this.applications[id].name);
 
@@ -214,8 +217,25 @@ Sentry.init({ dsn: "https://27c74054843742d5ad692d229d30c1bf@sentry.io/1318270" 
       logger.log("Set default background.");
     }
 
+    bringToFront(id) {
+      let index = this.order.indexOf(this.order.filter(item => item.id === id)[0]);
+      if (index >= 0) {
+        this.order.push(this.order[index]);
+        this.order.splice(index, 1);
+      }
+      this.updateWindowOrder();
+    }
+    updateWindowOrder() {
+      let i = 0;
+      for (let item of this.order) {
+        item.element.style("z-index", i++ + 5);
+      }
+    }
+
     windowClosed(id) {
       this.bar.closed(id);
+      this.order.splice(this.order.indexOf(this.order.filter(item => item.id === id)[0]), 1);
+      this.updateWindowOrder();
     }
 
     async api(path, queries) {
@@ -335,7 +355,7 @@ Sentry.init({ dsn: "https://27c74054843742d5ad692d229d30c1bf@sentry.io/1318270" 
             ${item.name}
           </span>
         `);
-        created.click(item.window.focus);
+        created.click(() => manager.bringToFront(item.window.id));
       }
       logger.log("Updated bar.");
     }
