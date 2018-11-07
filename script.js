@@ -1,3 +1,5 @@
+Sentry.init({ dsn: "https://27c74054843742d5ad692d229d30c1bf@sentry.io/1318270" });
+
 (() => {
   class xOSLogger {
     log(message) {
