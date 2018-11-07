@@ -51,7 +51,7 @@
       if (!fixed) this.element.find(".xos-window-maximizer").click(this.maximizeOrRestore, this);
       logger.log("Registered handlers.");
 
-      new xOSDraggableThing(this.element.find(".xos-window-border"), this.element);
+      this.draggabler = new xOSDraggableThing(this.element.find(".xos-window-border"), this.element);
       if (!fixed) {
         this.resizer = new xOSResizableThing(this.element.find(".xos-window-resizer"), this.element, this.element.find(".xos-window-content"), this.width, this.height);
       } else {
@@ -73,12 +73,14 @@
         that.element.removeClass("xos-maximized");
         that.resizer.enableResizing(that.resizer);
         that.element.find(".xos-window-maximizer").removeClass("fa-window-restore").addClass("fa-window-maximize");
+        that.draggabler.enableDragging(that.draggabler);
 
         that.maximized = false;
       } else {
         that.element.addClass("xos-maximized");
         that.resizer.disableResizing(that.resizer);
         that.element.find(".xos-window-maximizer").removeClass("fa-window-maximize").addClass("fa-window-restore");
+        that.draggabler.disableDragging(that.draggabler);
 
         that.maximized = true;
       }
@@ -342,7 +344,7 @@
       this.toDrag = drag;
 
       this.pos1, this.pos2, this.pos3, this.pos4 = 0;
-      this.handle.on("mousedown", this.down, this);
+      this.enableDragging(this);
     }
 
     down(event, that) {
@@ -367,6 +369,13 @@
     }
     up(_, that) {
       x(document).rmOn("mousemove", that.drag).rmOn("mouseup", that.up);
+    }
+
+    enableDragging(that) {
+      that.handle.on("mousedown", that.down, that);
+    }
+    disableDragging(that) {
+      that.handle.rmOn("mousedown", that.down);
     }
   }
 

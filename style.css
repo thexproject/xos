@@ -152,6 +152,10 @@ button:hover, input[type="button"]:hover, input[type="submit"]:hover, input[type
   float: right;
 }
 
+.xos-is-mobile .xos-window-maximizer {
+  display: none;
+}
+
 .xos-window-resizer {
   position: absolute;
   bottom: 0;
