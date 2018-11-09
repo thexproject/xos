@@ -15,10 +15,7 @@ xOS is still in development, and there is a lot to get done. The below list is p
 
 - Better resizing and moving of windows
 - Styles for more elements such as form elements
-- Disable highlighting some UI elements
-- Account system
 - Console
-- Focusing on windows should bring them to the top
 
 ## Links
 

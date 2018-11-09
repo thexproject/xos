@@ -3,7 +3,7 @@
 
 /* Desktop Background */
 html {
-  background-color: #909090;
+  background-color: var(--color-background-primary);
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat;
@@ -25,7 +25,7 @@ button, input[type="button"], input[type="submit"], input[type="reset"], .xos-ba
 
 /* Use Correct Font for Everything */
 button, input, textarea, body {
-  font-family: var(--fonts-main);
+  font-family: var(--fonts);
 }
 
 /* Remove Heading Boldness */
@@ -35,7 +35,7 @@ h1, h2, h3, h4, h5, h6 {
 
 /* Link Styles */
 a {
-  color: var(--color-foreground-link);
+  color: var(--color-accent);
   text-decoration: none;
 }
 
@@ -44,18 +44,19 @@ a:hover {
 }
 
 a:active, a:visited {
-  color: var(--color-foreground-link);
+  color: var(--color-accent);
 }
 
 /* Button Styles */
 button, input[type="button"], input[type="submit"], input[type="reset"], .xos-button-like {
-  color: var(--color-foreground-main);
+  color: var(--color-foreground);
   background: none;
-  border: 2px solid var(--color-foreground-main);
-  border-radius: 10px;
+  border: 2px solid var(--color-foreground);
+  border-radius: var(--border-radius);
   padding: 10px;
   outline: none;
   margin-bottom: 10px;
+  transition: var(--transition);
 }
 
 button, input[type="button"], input[type="submit"], input[type="reset"] {
@@ -63,8 +64,8 @@ button, input[type="button"], input[type="submit"], input[type="reset"] {
 }
 
 button:hover, input[type="button"]:hover, input[type="submit"]:hover, input[type="reset"]:hover, .xos-button-like:hover {
-  background: var(--color-background-light);
-  color: var(--color-foreground-dark);
+  border: 2px solid var(--color-accent);
+  background: var(--color-accent);
 }
 
 /* Bar Styles */
@@ -79,14 +80,19 @@ button:hover, input[type="button"]:hover, input[type="submit"]:hover, input[type
   font-size: 20px;
   vertical-align: middle;
   padding: 10px;
-  background: var(--color-background-main);
-  color: var(--color-foreground-main);
+  background: var(--color-background-primary);
+  color: var(--color-foreground);
 }
 
 .xos-bar-item {
   font-size: 15px;
   vertical-align: 2.5px;
   margin-left: 10px;
+}
+
+#xos-logger-outer {
+  float: right;
+  cursor: pointer;
 }
 
 /* Menu Styles */
@@ -102,19 +108,27 @@ button:hover, input[type="button"]:hover, input[type="submit"]:hover, input[type
   padding: 10px;
   overflow: auto;
   z-index: 999;
-  border: 2px solid var(--color-background-main);
+  border: 1px solid var(--color-background-primary);
   border-left: none;
   border-bottom: none;
+}
+
+.xos-is-mobile #xos-menu {
+  width: 100%;
+  height: calc(100vh - 40px);
+  border: none;
 }
 
 /* Application Styles */
 .xos-window {
   background: var(--color-background-secondary);
-  color: var(--color-foreground-main);
+  color: var(--color-foreground);
   font-size: 15px;
   position: fixed;
   left: 0;
   top: 0;
+  border: 1px solid transparent;
+  border-radius: var(--border-radius);
 }
 
 .xos-is-mobile .xos-window, .xos-window.xos-maximized {
@@ -129,22 +143,28 @@ button:hover, input[type="button"]:hover, input[type="submit"]:hover, input[type
   padding: 10px;
   box-sizing: border-box;
   line-height: 15px;
-  background: var(--color-background-main);
+  background: var(--color-background-primary);
   overflow: hidden;
+  border: 1px solid transparent;
+  border-radius: var(--border-radius) var(--border-radius) 0 0;
 }
 
 .xos-window-content {
   padding: 10px;
   overflow: auto;
   box-sizing: border-box;
-  border: 2px solid var(--color-background-main);
+  border: 1px solid var(--color-background-primary);
   border-top: none;
   line-height: 150%;
-  border: none;
+  border-radius: 0 0 var(--border-radius) var(--border-radius);
 }
 
 .xos-is-mobile .xos-window-content, .xos-maximized .xos-window-content {
   height: calc(100vh - (35px + 40px)) !important;
+}
+
+.xos-is-mobile .xos-window-content {
+  border: none;
 }
 
 .xos-window-action {
@@ -167,4 +187,26 @@ button:hover, input[type="button"]:hover, input[type="submit"]:hover, input[type
 
 .xos-window-border, .xos-window-content {
   width: 100%;
+}
+
+/* Setup Styles */
+#xos-setup {
+  margin: 30vh 8vw 0 8vw;
+  color: var(--color-foreground);
+}
+
+#xos-setup h1 {
+  font-size: 3em;
+  margin: 0;
+  margin-bottom: 1.5em;
+}
+
+/* Disable Selection on Some Elements */
+#xos-bar, #xos-menu, .xos-window-border, .fas {
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+.xos-window-content {
+  cursor: default;
 }
