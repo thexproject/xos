@@ -190,7 +190,7 @@ Sentry.init({ dsn: "https://27c74054843742d5ad692d229d30c1bf@sentry.io/1318270" 
     }
     async startStartupApplications() {
       for (let application of await this.api("applications/startup")) {
-        await this.startApplication(application);
+        await this.startApplication(application.id);
       }
 
       logger.log("Started startup applications.");
