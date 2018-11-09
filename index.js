@@ -249,8 +249,8 @@ Sentry.init({ dsn: "https://27c74054843742d5ad692d229d30c1bf@sentry.io/1318270" 
     }
 
     async api(path, queries) {
-      let ajaxResponse = await xJax(`${this.endpoint}/${path}`, queries);
-      return JSON.parse(ajaxResponse).data;
+      const ajaxResponse = await xJax(`${this.endpoint}/${path}`, queries);
+      return JSON.parse(ajaxResponse);
     }
   }
 
