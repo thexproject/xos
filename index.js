@@ -203,6 +203,7 @@ Sentry.init({ dsn: "https://27c74054843742d5ad692d229d30c1bf@sentry.io/1318270" 
           "name": background.name,
           "value": background.value,
           "solid": background.solid,
+          "accent": background.accent,
           "englishType": background.solid ? "Solid Color" : "Image"
         };
       }
@@ -215,6 +216,7 @@ Sentry.init({ dsn: "https://27c74054843742d5ad692d229d30c1bf@sentry.io/1318270" 
         } else {
           x("html").style("background-image", `url("${this.backgrounds[id].value}")`);
         }
+        document.documentElement.style.setProperty("--color-accent", this.backgrounds[id].accent);
         this.db.set("xos-default-wallpaper", id);
         logger.log(`Set background to ${id}.`);
       } else {
@@ -479,7 +481,7 @@ Sentry.init({ dsn: "https://27c74054843742d5ad692d229d30c1bf@sentry.io/1318270" 
         },
         "onfailure": error => {
           x("#my-signin2").destroy();
-          x("body").append(`
+          x("#xos-setup").append(`
             <p>You couldn't be logged in: ${error.error.replace(new RegExp("_", "g"), " ")}. <a href="javascript:window.location.reload(false);">Reload</a>.</p>
           `);
         }

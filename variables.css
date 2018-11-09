@@ -1,10 +1,10 @@
 :root {
-  --color-background-main: #272727;
+  --color-background-primary: #272727;
   --color-background-secondary: #333333;
-  --color-background-light: #ffffff;
-  --color-foreground-main: #ffffff;
-  --color-foreground-dark: #000000;
-  --color-foreground-link: #4e8cda;
+  --color-foreground: #ffffff;
+  --color-accent: #4285f4;
 
-  --fonts-main: "Ubuntu", sans-serif;
+  --fonts: "Ubuntu", sans-serif;
+  --transition: background 0.1s ease-in-out, border 0.1s ease-in-out;
+  --border-radius: 1px;
 }
