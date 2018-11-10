@@ -121,13 +121,13 @@ button:hover, input[type="button"]:hover, input[type="submit"]:hover, input[type
 
 /* Application Styles */
 .xos-window {
-  background: var(--color-background-secondary);
+  background: var(--color-background-primary);
   color: var(--color-foreground);
   font-size: 15px;
   position: fixed;
   left: 0;
   top: 0;
-  border: 1px solid transparent;
+  border: 1px solid var(--color-background-primary);
   border-radius: var(--border-radius);
 }
 
@@ -143,19 +143,15 @@ button:hover, input[type="button"]:hover, input[type="submit"]:hover, input[type
   padding: 10px;
   box-sizing: border-box;
   line-height: 15px;
-  background: var(--color-background-primary);
   overflow: hidden;
-  border: 1px solid transparent;
-  border-radius: var(--border-radius) var(--border-radius) 0 0;
 }
 
 .xos-window-content {
   padding: 10px;
   overflow: auto;
   box-sizing: border-box;
-  border: 1px solid var(--color-background-primary);
-  border-top: none;
   line-height: 150%;
+  background: var(--color-background-secondary);
   border-radius: 0 0 var(--border-radius) var(--border-radius);
 }
 
