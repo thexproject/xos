@@ -68,6 +68,31 @@ button:hover, input[type="button"]:hover, input[type="submit"]:hover, input[type
   background: var(--color-accent);
 }
 
+/* Text Input Styles */
+label {
+  font-size: 13px;
+}
+
+textarea, input {
+  border: none;
+  outline: none;
+  margin-bottom: 10px;
+}
+
+textarea, input:not([type=submit]):not([type=button]):not([type=reset]):not([type=file]) {
+  padding: 10px;
+  border: none;
+  outline: none;
+  width: calc(100% - 20px);
+  border-radius: var(--border-radius);
+  font-size: 15px;
+}
+
+textarea {
+  resize: vertical;
+  height: 70px;
+}
+
 /* Bar Styles */
 #xos-bar {
   position: fixed;
