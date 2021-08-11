@@ -1,3 +1,5 @@
+> 🚩 **This project is archived!** 🚩
+
 # xOS
 
 [![License](https://img.shields.io/github/license/thexproject/xos.svg?style=flat)](https://github.com/thexproject/xos/blob/master/LICENSE)
